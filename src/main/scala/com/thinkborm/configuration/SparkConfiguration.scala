@@ -19,7 +19,7 @@ class SparkConfiguration {
       .builder()
       .appName(this.taskProperties.getName)
       .enableHiveSupport()
-      .config("spark.some.config.option", "some-value")
+      .config("spark.master", "yarn")
       //      .config("spark.dynamicAllocation.enabled", "false")
       .getOrCreate()
     //    sqlContext.setConf("spark.sql.inMemoryColumnarStorage.compressed", "true")

@@ -9,17 +9,24 @@ import org.springframework.stereotype.Component
 @Component
 class TestTask extends Task {
 
+  import taskImplicits._
+
+  @Autowired
+  @transient
+  var taskProperties1: TaskProperties = _
 
   protected val LOGGER: Logger = LoggerFactory.getLogger(classOf[TestTask])
   /**
     * 具体的业务逻辑
     */
   override def doTask(): Unit = {
-    LOGGER.info("task test start")
 
+    LOGGER.info("task test start")
     // TODO: 具体的业务逻辑
-    val df = spark.sql("select 1 as a ,2 as b")
-    df.show()
+    val df = spark.sql("select 1 as a ,2 as b").toDF()
+
+    df.select($"a"+$"b").show()
+
     LOGGER.info("task test stop")
   }
 
